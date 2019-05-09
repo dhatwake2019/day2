@@ -195,7 +195,7 @@ Using your GUI, compare the tif file to the txt files you generated
 
 While we’re here, why don’t we just OCR all of them in one batch?
 
-`$ for %i in (*.tif) do '/cygdrive/c/Users/YOURUSERNAME/AppData/Local/Tesseract-OCR/tesseract.exe' $i $i; done`
+`$ for i in *.tif; do '/cygdrive/c/Users/YOURUSERNAME/AppData/Local/Tesseract-OCR/tesseract.exe' $i $i; done`
 
 
 
