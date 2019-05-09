@@ -163,22 +163,24 @@ You visit an archive and need to capture images of text based archival collectio
 *Sometimes we get page images, but what we really need is plain text. Tesseract is free OCR software available in lots of languages that can generate text from images at a large scale.*
 
 Navigate to the folder of tiffs and list the files
-`$ cd interview_0662`
+`$ cd interview_0368`
 
 `$ ls`
 
-Convert one tiff file to one txt file using Tesseract OCR
+Convert one tif file to one txt file using Tesseract OCR
 
 ----
 **Mac Users**
 
-`$ tesseract interview_0662-0.tiff interview_0662-0`
+`$ tesseract interview_0368-1.tif interview_0368-1`
+
+(there may be an error here, but let's check out the text file to see what happened)
 
 Using your GUI, compare the tif file to the txt file you generated
 
 While we’re here, why don’t we just OCR all of them in one batch?
 
-`$ for i in *.tiff ; do tesseract $i $i; done;`
+`$ for i in *.tif ; do tesseract $i $i; done;`
 
 ----
 **Windows Users**
@@ -187,14 +189,13 @@ Find tesseract.exe (it’s probably in Program Files (x86)) and drag it
 in. You can also try the path below and then hunt down the file if it
 doesn’t work
 
-`$ '/c/Program Files (x86)/Tesseract-OCR/tesseract.exe' interview_0662-0.tiff interview_0662-0`
+`$ '/cygdrive/c/Users/YOURUSERNAME/AppData/Local/Tesseract-OCR/tesseract.exe Program Files (x86)/Tesseract-OCR/tesseract.exe' interview_0662-0.tiff interview_0662-0`
 
 Using your GUI, compare the tif file to the txt files you generated
 
 While we’re here, why don’t we just OCR all of them in one batch?
 
-`$ for %i in (*.tif) do '/c/Program Files
-(x86)/Tesseract-OCR/tesseract.exe' %i %i`
+`$ for %i in (*.tif) do '/cygdrive/c/Users/YOURUSERNAME/AppData/Local/Tesseract-OCR/tesseract.exe Program Files (x86)/Tesseract-OCR/tesseract.exe' $i $i; done`
 
 
 
