@@ -5,7 +5,7 @@
 @@@@change the name of the folder and the url to download
 
 ### Introduction
-**Before we start, download our [sample files](@@@update zip link) and put the .zip file on the Desktop. DO NOT UNZIP THE FILE!**
+**Before we start, download [interviewfiles.zip](https://github.com/dhatwake2019/day2/raw/master/commandlinebootcamp/interviewfiles.zip), which has some texts and page images for us to work with, and put the .zip file on the Desktop. DO NOT UNZIP THE FILE!**
 
 [Slides here](https://docs.google.com/presentation/d/1ikyXzrrbHEa9JUi14quuGZFMnEkye8tNtKaCVYJawAw/edit?usp=sharing)
 
