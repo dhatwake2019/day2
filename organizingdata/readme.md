@@ -115,8 +115,7 @@ So let's get started on combining these metadata fields.
 - Enter `value.parseJson()[0].lat + ', ' + value.parseJson()[0].lon` and call the new column 'latlng.' Hit OK. This will parse the JSON and correctly format the latitute and longitude in the new column.
 - You should see that the resulting column has the latitude and longitude for the city name.
 - You can delete the 'geocodingResponse' column (Edit Column > Remove This Column) after you have already extracted the lat/lng coordinates.
-
-> Some software will want latitude and longitude separately. If that's the case, Edit latlng Column > Split into several columns... and then split by the substring ","
+- Some software (including the software we'll be using) will want latitude and longitude separately. Click latlng Column > Split into several columns... and then split by the substring ",". Rename accordingly.
 
 #### Saving and Exporting
 In the top right corner, you can click on 'Export' and save the data in a number of different formats, including csv and HTML tables. Let's export this as `nc_lifehist_metadata.csv`.
