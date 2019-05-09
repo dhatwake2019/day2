@@ -189,13 +189,13 @@ Find tesseract.exe (it’s probably in Program Files (x86)) and drag it
 in. You can also try the path below and then hunt down the file if it
 doesn’t work
 
-`$ '/cygdrive/c/Users/YOURUSERNAME/AppData/Local/Tesseract-OCR/tesseract.exe Program Files (x86)/Tesseract-OCR/tesseract.exe' interview_0662-0.tiff interview_0662-0`
+`$ '/cygdrive/c/Users/YOURUSERNAME/AppData/Local/Tesseract-OCR/tesseract.exe' interview_0662-0.tiff interview_0662-0`
 
 Using your GUI, compare the tif file to the txt files you generated
 
 While we’re here, why don’t we just OCR all of them in one batch?
 
-`$ for %i in (*.tif) do '/cygdrive/c/Users/YOURUSERNAME/AppData/Local/Tesseract-OCR/tesseract.exe Program Files (x86)/Tesseract-OCR/tesseract.exe' $i $i; done`
+`$ for %i in (*.tif) do '/cygdrive/c/Users/YOURUSERNAME/AppData/Local/Tesseract-OCR/tesseract.exe' $i $i; done`
 
 
 
