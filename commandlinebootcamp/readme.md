@@ -41,7 +41,7 @@ For Windows users, open a program called **[Cygwin](https://www.cygwin.com/).**
 Generally speaking most of the stuff you interact with on your computer
 is organized according to a hierarchical folder structure that is partially obscured through the GUI. When you first start your command line interpreter, you’ll want to find where you are located in that structure.
 
-@@check to see if cygwin needs a special first command@@@
+**Windows/Cygwin users: when you first open Cygwin, type `$ cd c:/Users/YOURUSERNAME`. If you're not sure of your username, you can type `$ cd:/Users` and then type `$ ls` to see the options. - this will get you to your 'home' directory**
 
 Find your location in the filesystem using print working directory
 **pwd**
@@ -80,25 +80,29 @@ Navigate up one directory **cd ..**
 
 `$ cd ..`
 
-Navigate to your home directory using change directory **cd**
+Again
 
-`$ cd`
-
+`$ cd ..`
 @@@@ making a diagram for this would be awesome
 
-Move interviewfiles.zip file into the corpora folder using **mv** and a path
+You should now be in the Desktop directory. Move interviewfiles.zip file into the corpora folder using **mv** and a path
 
-`$ mv Desktop/interviewfiles.zip Desktop/project/corpora`
+`$ mv interviewfiles.zip project/corpora`
 
 Navigate back down to corpora using **cd** and a path
 
-`$ cd Desktop/project/corpora`
+`$ cd project/corpora`
 
 ## Manipulation
 @@@replace the filenames all over - search for dmics
 By this point we’ve figured out how to find our breadcrumbs if we got lost (pwd), and how to figure out what’s around us (ls), how to move up and down levels (cd / cd .. ), how to create new folders, and how to move content into different folders. Now we are going to engage in a bit of basic manipulation of content within the dmics-texts.zip file you downloaded at the beginning of the workshop, currently residing in the corpora folder that you created in the previous section.
 
-Unzip the interviewfiles.zip file in the corpora folder using **unzip**
+**Windows/Cygwin**: there is a package for unzipping, but it's not installed by default. It's easiest to just navigate to the folder in the GUI and unzip it ('Extract here').
+
+
+@@@need to edit the files so they don't come out in a corpora folder, but are instead just two folders@@
+
+**Mac** Unzip the interviewfiles.zip file in the corpora folder using **unzip**
 
 `$ unzip interviewfiles.zip`
 
@@ -126,9 +130,9 @@ You probably don't need that zip anymore get rid of it using remove **rm**
 
 `$ rm dmics-texts.zip` @update
 
-@@@make sure this is still here@@ The folder `__MACOSX` is an annoying add-in you get when you zip something on Mac OS X. Let's remove that.
+The folder \_\_MACOSX is an annoying add-in you get when you zip something on Mac OS X. Let's remove that.
 
-`$ rm -r __MACOSX`
+`$ rm -r __MACOSX`      (that's two underscores)
 >*the -r flag is recursive—since we're removing a folder, we want to remove the folder and everything in it*
 
 `$ ls`
