@@ -12,13 +12,17 @@ We'll be using the same data as we did for the [Command Line Bootcamp](https://g
 
 ## Command Line File Editing
 
-Open up Terminal/Gitbash and navigate to the 'Corpora' folder. To get there from anywhere, type `$ cd` and then `$ cd Desktop/project/corpora`
+Open up Terminal/Gitbash and navigate to the 'Corpora' folder: `Desktop/project/corpora`
 
 ### Renaming text files based on metadata
 Remember how we used OpenRefine to come up with new, descriptive filenames? Well now, using a couple of command line tools, we can rename (or, technically, *move*) files according to our spreadsheet. **Drag your exported CSV into the corpora folder (or quickly download our version by pasting `$ curl @@@where it's going to live on github@@`)** @@@ this finished version will be posted in the data viz folder and linked here@@
 
 @@update this to have the filename that's recommended
+**Mac users**: 
 `$ sed -i -e '$'\n'' test.csv | cat test.csv | while IFS=, read -r orig new trash; do mv "$orig".txt "$new".txt; done`
+
+**Windows users**: 
+`$ sed -i -e '$a\' test.csv | cat test.csv | while IFS=, read -r orig new trash; do mv "$orig" "$new"; done`
 
 This command is really long and a bit confusing, so we'll break it down. 
 `sed -i -e '$'\n'' test.csv ` - @@rename This is a bit of a weird workaround. The way we'll be going through the csv will only operate on lines with a line return on the end. It wouldn't be all that strange for a csv to end without one, so we run the risk of missing the final row. `sed` ("stream editor") is a text manipulation tool, `-i` means it's edited in place (as opposed to making a backup), `$` jumps to the end of the file, `'\n'` adds the character for the line return, and `test.csv` identifies the file all of this will be performed on.
@@ -105,7 +109,11 @@ Here's one possible regular expression to match these running headers. `NORTH CA
 
 If we look back at our previous exercises, we could probably guess that `egrep -o 'NORTH CAROLINA WRITERS PROJECT\s+[0-9]+' *.txt` would print out every line that matches....but how to we remove that line and leave everything else behind?
 
-`$ sed -E 's/NORTH CAROLINA WRITERS PROJECT[[:space:]]+[0-9]+//g'` *note that the space character changes from a `\s` to a `[[:space:]]`. The former will work for some machines, but not others*
+`$ sed -E -i 's/NORTH CAROLINA WRITERS PROJECT[[:space:]]+[0-9]+//g' *.txt` *note that the space character changes from a `\s` to a `[[:space:]]`. The former will work for some machines, but not others*
+
+Now let's check our work by using that egrep command again:
+
+`$ egrep -o 'NORTH CAROLINA WRITERS PROJECT\s+[0-9]+' *.txt`
 
 
 ## Further Resources
