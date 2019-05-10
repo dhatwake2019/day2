@@ -60,7 +60,7 @@ one of your own:
 
 ### LC’s Chronicling America API
 
-Description
+####Description
 An API (application programming interface) is a defined set of methods for communicating with a software system. Each database has its own system, so looking at the codex and documentation for each is necessary. APIs can be public or private, though even public ones usually require a key to make sure the service isn’t being absed. Most API’s require that you get a key to access the API—this allows them to shut down abusive use. We’ll just hope that our calls won’t get our IP banned :). Library of Congress has multiple APIs—they have some documentation on the Chronicling America API and a nice tutorial on working with the API through Python in Jupyter Notebooks.
 
 #### Why you might need it
@@ -71,6 +71,7 @@ You want to study the newspaper coverage of North Carolina tenant farmers during
 
 #### Activity
 Use Postman and the ChronAm API to extract OCR text from the newspapers.
+*You don't have to create a Postman account—you can click the link at the bottom to skip!*
 
 #### Directions
 Make sure you’ve downloaded Postman from [https://www.getpostman.com/](https://www.getpostman.com/)
@@ -81,26 +82,26 @@ First, let’s check out the advanced search web interface for the newspapers. [
 
 Let’s search for the words “labor” or “union” in the newspaper while Ford owned it:
 * In ‘State’ select North Carolina
-* In ‘Select Year(s)’, put in 1929-1939
+* In ‘Select Year(s)’, put in 1938-1939
 * In the search, we’ll try “...with the words…” and put in “tenant farmer” and leave the number at 5
 * Click Search
-This should bring up 277 results that include both "tenant" and "farmer" within 5 words in the results.
+This should bring up 31 results that include both "tenant" and "farmer" within 5 words in the results.
 
 Let’s take a quick look at the URL for the results page - it shows us exactly what’s going on if we know what to look for::
-[https://chroniclingamerica.loc.gov/search/pages/results/?state=North+Carolina&dateFilterType=yearRange&date1=1929&date2=1939&language=&ortext=&andtext=&phrasetext=&proxtext=tenant+farmer&proxdistance=5&rows=20&searchType=advanced](https://chroniclingamerica.loc.gov/search/pages/results/?state=North+Carolina&dateFilterType=yearRange&date1=1929&date2=1939&language=&ortext=&andtext=&phrasetext=&proxtext=tenant+farmer&proxdistance=5&rows=20&searchType=advanced)
+[https://chroniclingamerica.loc.gov/search/pages/results/?state=North+Carolina&lccn=&dateFilterType=yearRange&date1=1938&date2=1939&language=&ortext=&andtext=&phrasetext=&proxtext=tenant+farmer&proxdistance=5&rows=20&searchType=advanced](https://chroniclingamerica.loc.gov/search/pages/results/?state=North+Carolina&lccn=&dateFilterType=yearRange&date1=1938&date2=1939&language=&ortext=&andtext=&phrasetext=&proxtext=tenant+farmer&proxdistance=5&rows=20&searchType=advanced)
 
 We’ll break this down:
 **https://chroniclingamerica.loc.gov/search/pages/results/** - this is the main search results site for the project - there aren’t any fields specified, so it will bring up all 13.5 million results if we were to go to that address
 **?** - this signifies that a query is coming-everything after this is the search material
 **state=North+Carolina** - there are sets of keys and values; the first word tells us what field we’re searching and the second tells us what information we’re looking for. This is searching for papers in the state of North Carolina
 **&** - this appends another pair of keys and values; we’ll see it used a bunch here in the URL
-**dateFilterType=yearRange&date1=1929&date2=1939** - this shows that the filter is years (not month/date/year) and searches for things between 1929 (date1) & 1939 (date2)
+**dateFilterType=yearRange&date1=1938&date2=1939** - this shows that the filter is years (not month/date/year) and searches for things between 1938 (date1) & 1939 (date2)
 **language=&ortext=&andtext=&phrasetext=** - for some reason, LC leaves in all the blank fields; we left language, ‘any word,’ 'all words,' and 'phrase' blank
 **proxtext=tenant+farmer&proxdistance=5** - this is the proximity field that we entered - it’s looking for only papers with both words within 5 words of each other
 **rows=20&searchType=advanced** - this is just showing the first 20 results, and the search was conducted via advanced search
 
 If we’d like, we can make a cleaner URL without the blank fields. If you were to paste that into a browser, you’d see the same results.
-https://chroniclingamerica.loc.gov/search/pages/results/?state=North+Carolina&dateFilterType=yearRange&date1=1929&date2=1939&proxtext=tenant+farmer&proxdistance=5
+https://chroniclingamerica.loc.gov/search/pages/results/?state=North+Carolina&dateFilterType=yearRange&date1=1938&date2=1939&proxtext=tenant+farmer&proxdistance=5
 
 So, let’s investigate what’s here. Click on the first result.
 
@@ -118,13 +119,13 @@ Open Postman and select ‘Requests’
 
 It will ask you to name the request - call it ChronAm
 
-Below, it will ask you to select a place to save things. Click ‘+ Create Collection,’ type ChronAm, then click on the checkmark on the right. Then click on ‘Save the ChronAm’ on the bottom.
+Below, it will ask you to select a place to save things. Click ‘+ Create Collection,’ type ChronAm, then click on the checkmark on the right. Then click on ‘Save to ChronAm’ on the bottom.
 
 This should bring you to a new screen with a space to develop a request URL and a space to see the response.
 
 With Postman, you can enter the base URL and then add keys and values to see what kinds of responses you can get. We can just do a shortcut and paste our already-developed URL into the ‘Enter Request URL’ space: https://chroniclingamerica.loc.gov/search/pages/results/?state=North+Carolina&dateFilterType=yearRange&date1=1929&date2=1939&proxtext=tenant+farmer&proxdistance=5
 
-Click on ‘Params’ to the right, and you’ll see that it has broken down the request to show the sets of keys and values. Click ‘Send’ and see what happens.
+Look at the ‘Query Params’ on the bottom, and you’ll see that it has broken down the request to show the sets of keys and values. **Click ‘Send’ and see what happens.**
 
 We just got an HTML page back. All it’s doing is showing us the HTML of the page we were just looking at. We need to add a different key/value to make it more useful for us:
 Key: format	value: json
@@ -135,33 +136,33 @@ Now we have a result that is a bit intimidating but...seems to make a little mor
 
 At the top, we have 
 {
-	"totalItems": 227,
+	"totalItems": 31,
 	"endIndex": 20,
 	"startIndex": 1,
 	"itemsPerPage": 20,
 	"items": [
 
-This tells us that 227 pages matched our search and that it’s giving us results 1-20.
+This tells us that 31 pages matched our search and that it’s giving us results 1-20.
 
 Scroll down a bit and you’ll see all kinds of metadata for the paper and the specific page that we’re looking at. Take note of the ‘ocr_eng’ field, which has all of the text for the page. (The ‘\n’ marks are new line markers—it makes it hard to read here, but we don’t really need to worry about them.)
 
 It’s nice that we are limited to 20 responses and the results came quickly but, it would be nice to have all of the pages in a single file. Enter a new key/value:
-Key: rows	Value: 227
+Key: rows	Value: 31
 
 Hit send. This may take a minute to load. (Note: I found this convention by going back to the URL and seeing the key/value ‘rows=20’. One would logically assume that the convention would be ‘itemsPerPage’ instead of ‘rows’, but it’s not.)
 
-Once the results have come back, you should see that there are 227 results. Click on the two boxes icon on the right just above the result. This will copy the results to your clipboard. Open SublimeText and paste the results there. Click ‘save as’ and call it ‘NCtenantfarmer.json’ and save it in the Desktop/chronam folder. [If something’s gone wrong, this file is available in our drive.]
+Once the results have come back, you should see that there are 31 results. Click on the two boxes icon on the right just above the result. This will copy the results to your clipboard. Open SublimeText and paste the results there. Click ‘save as’ and call it ‘nc-tenantfarmer.json’ and save it in the Desktop/chronam folder. [If something’s gone wrong, this file is available in our drive.](@@@)
 
-So, we now have everything in one json file, but we can’t really analyze it very well. We’ll want to split it out into individual files based on each page. We can do that if we download this fairly short Python script (right click on an empty part of the page, click save as, and put it in the Desktop/chronam folder - make sure it’s called ‘neh-chronam.py).
+So, we now have everything in one json file, but we can’t really analyze it very well. We’ll want to split it out into individual files based on each page. We can do that if we download this [fairly short Python script](@@@Link) (right click on an empty part of the page, click save as, and put it in the Desktop/chronam folder - make sure it’s called ‘chronam.py).
 
 @@@update script and update script name
 
-On Windows: Open the chronam folder in Windows Explorer and double-click on ‘neh-chronam.py’
+On Windows: Open the chronam folder in Windows Explorer and double-click on ‘chronam.py’  @@test this on windows@@
 -------
 On Macs:
 Open Terminal
 $ cd Desktop/chronam
-$ python neh-chronam.py
+$ python chronam.py
 ------
 
 Now, using Windows Explorer/Finder, open up the Desktop/chronam folder and see what’s there.
