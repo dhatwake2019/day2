@@ -9,7 +9,7 @@ get data from collections, documents, and the web.
 -   *cURL*
 -   [*Postman*](https://www.getpostman.com/)
 -   [*Library of Congress's Chronicling America API*](https://chroniclingamerica.loc.gov/about/api/)
--	A Python Script for processing Chronicling America API results @@post this
+-	A [Python Script for processing Chronicling America API results](https://raw.githubusercontent.com/dhatwake2019/day2/master/gettingdata/chronam.py)
 
 ### Data
 
@@ -151,11 +151,9 @@ Key: rows	Value: 31
 
 Hit send. This may take a minute to load. (Note: I found this convention by going back to the URL and seeing the key/value ‘rows=20’. One would logically assume that the convention would be ‘itemsPerPage’ instead of ‘rows’, but it’s not.)
 
-Once the results have come back, you should see that there are 31 results. Click on the two boxes icon on the right just above the result. This will copy the results to your clipboard. Open SublimeText and paste the results there. Click ‘save as’ and call it ‘nc-tenantfarmer.json’ and save it in the Desktop/chronam folder. [If something’s gone wrong, this file is available in our drive.](@@@)
+Once the results have come back, you should see that there are 31 results. Click on the two boxes icon on the right just above the result. This will copy the results to your clipboard. Open SublimeText and paste the results there. Click ‘save as’ and call it ‘nc-tenantfarmer.json’ and save it in the Desktop/chronam folder. [If something’s gone wrong, this file is available in our drive.](https://raw.githubusercontent.com/dhatwake2019/day2/master/gettingdata/nc-tenantfarmer.json)
 
-So, we now have everything in one json file, but we can’t really analyze it very well. We’ll want to split it out into individual files based on each page. We can do that if we download this [fairly short Python script](@@@Link) (right click on an empty part of the page, click save as, and put it in the Desktop/chronam folder - make sure it’s called ‘chronam.py).
-
-@@@update script and update script name
+So, we now have everything in one json file, but we can’t really analyze it very well. We’ll want to split it out into individual files based on each page. We can do that if we download this [fairly short Python script](https://raw.githubusercontent.com/dhatwake2019/day2/master/gettingdata/chronam.py) (right click on an empty part of the page, click save as, and put it in the Desktop/chronam folder - make sure it’s called ‘chronam.py).
 
 On Windows: Open the chronam folder in Windows Explorer and double-click on ‘chronam.py’  @@test this on windows@@
 -------
@@ -170,6 +168,7 @@ Now, using Windows Explorer/Finder, open up the Desktop/chronam folder and see w
 
 **Further Resources**
 
+- Brandon Locke, [Downloading America](https://github.com/brandontlocke/downloadingamerica)
 - Ian Milligan, [*Automated Downloading with
 Wget*](http://programminghistorian.org/lessons/automated-downloading-with-wget)
 - Free Software Foundation, [*Wget
