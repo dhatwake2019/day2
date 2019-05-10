@@ -2,8 +2,6 @@
 
 *Original slides and activity were developed by Thomas Padilla and have been lightly altered*
 
-@@@@change the name of the folder and the url to download
-
 ### Introduction
 **Before we start, download [interviewfiles.zip](https://github.com/dhatwake2019/day2/raw/master/commandlinebootcamp/interviewfiles.zip), which has some texts and page images for us to work with, and put the .zip file on the Desktop. DO NOT UNZIP THE FILE!**
 
@@ -83,7 +81,6 @@ Navigate up one directory **cd ..**
 Again
 
 `$ cd ..`
-@@@@ making a diagram for this would be awesome
 
 You should now be in the Desktop directory. Move interviewfiles.zip file into the corpora folder using **mv** and a path
 
@@ -94,13 +91,9 @@ Navigate back down to corpora using **cd** and a path
 `$ cd project/corpora`
 
 ## Manipulation
-@@@replace the filenames all over - search for dmics
 By this point we’ve figured out how to find our breadcrumbs if we got lost (pwd), and how to figure out what’s around us (ls), how to move up and down levels (cd / cd .. ), how to create new folders, and how to move content into different folders. Now we are going to engage in a bit of basic manipulation of content within the dmics-texts.zip file you downloaded at the beginning of the workshop, currently residing in the corpora folder that you created in the previous section.
 
 **Windows/Cygwin**: there is a package for unzipping, but it's not installed by default. It's easiest to just navigate to the folder in the GUI and unzip it ('Extract here').
-
-
-@@@need to edit the files so they don't come out in a corpora folder, but are instead just two folders@@
 
 **Mac** Unzip the interviewfiles.zip file in the corpora folder using **unzip**
 
@@ -108,27 +101,16 @@ By this point we’ve figured out how to find our breadcrumbs if we got lost (pw
 
 `$ ls`
 
-Result: @@@update this
-
 ```
-ActoEPoems.htm
-AddiRPoetr.htm
-AikiLEpist.htm
-BailJColle.htm
-BailJFamil.htm
-LadyAOrigi.htm
 __MACOSX
-dmics-texts.zip
-iriswmagic.htm
-ladyaelija.htm
-ladyavarie.htm
-rdme.txt
-sevenagesofwoman
+interviewfiles.zip
+interview_0368
+texts-header
 ```
 
 You probably don't need that zip anymore get rid of it using remove **rm**
 
-`$ rm dmics-texts.zip` @update
+`$ rm interviewfiles.zip`
 
 The folder \_\_MACOSX is an annoying add-in you get when you zip something on Mac OS X. Let's remove that.
 
@@ -137,20 +119,11 @@ The folder \_\_MACOSX is an annoying add-in you get when you zip something on Ma
 
 `$ ls`
 
-Result: @update
+Result:
 
 ```
-ActoEPoems.htm
-AddiRPoetr.htm
-AikiLEpist.htm
-BailJColle.htm
-BailJFamil.htm
-LadyAOrigi.htm
-iriswmagic.htm
-ladyaelija.htm
-ladyavarie.htm
-rdme.txt
-sevenagesofwoman
+interview_0368
+texts-header
 ```
 
 ### Tesseract Optical Character Recognition (OCR)
@@ -193,16 +166,31 @@ Find tesseract.exe (it’s probably in Program Files (x86)) and drag it
 in. You can also try the path below and then hunt down the file if it
 doesn’t work
 
-`$ '/cygdrive/c/Users/YOURUSERNAME/AppData/Local/Tesseract-OCR/tesseract.exe' interview_0662-0.tiff interview_0662-0`
+`$ '/cygdrive/c/Users/YOURUSERNAME/AppData/Local/Tesseract-OCR/tesseract.exe' interview_0368-1.tiff interview_0368-1` [**be sure to add your username in the appropriate space**]
 
 Using your GUI, compare the tif file to the txt files you generated
 
 While we’re here, why don’t we just OCR all of them in one batch?
 
-`$ for i in *.tif; do '/cygdrive/c/Users/YOURUSERNAME/AppData/Local/Tesseract-OCR/tesseract.exe' $i $i; done`
+`$ for i in *.tif; do '/cygdrive/c/Users/YOURUSERNAME/AppData/Local/Tesseract-OCR/tesseract.exe' $i $i; done` [**be sure to add your username in the appropriate space**]
 
 If we want to put these all into a single file, we can do that
 
 `$ cat *.txt > interview_0368.txt`
 
+## Further Resources
 
+[*Sourcecaster*](https://datapraxis.github.io/sourcecaster/)
+
+Library Carpentry. [Shell Lessons for Librarians](https://librarycarpentry.github.io/lc-shell/)
+
+Idan Kamara, [*Explain Shell*](http://explainshell.com/)
+
+Learn Code The Hard Way, [*Linux Bash Shell Cheat
+Sheet*](http://cli.learncodethehardway.org/bash_cheat_sheet.pdf)
+
+Learn Code the Hard Way, [*The
+Setup*](http://cli.learncodethehardway.org/book/ex1.html)
+
+Ian Milligan and James Baker, [*Introduction to the Bash Command
+Line*](http://programminghistorian.org/lessons/intro-to-bash)
