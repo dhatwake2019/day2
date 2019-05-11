@@ -1,6 +1,6 @@
 ## Data Visualization with Flourish
 
-**Please be sure to have a free account on [Flourish](http://flourish.studio) and either have the exported data from the OpenRefine tutorial, or use [this fully geocoded dataset](TKTKTK@).**
+**Please be sure to have a free account on [Flourish](http://flourish.studio) and either have the exported data from the OpenRefine tutorial, or use [this fully geocoded dataset](https://raw.githubusercontent.com/dhatwake2019/day2/master/dataviz/nc-lifehist-metadata.csv).**
 
 ### Introduction
 Flourish is a new, freemium, web-based data visualization platform. It's fairly similar to Tableau, if you've heard of that, but it doesn't require downloading any software, and it's a bit easier to figure out (in my opinion, anyway). Because we're using the free version, all data and visualizations will be publicly available, but *most* of the valuable parts of the service will still be available.

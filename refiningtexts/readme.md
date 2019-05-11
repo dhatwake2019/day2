@@ -15,7 +15,7 @@ We'll be using the same data as we did for the [Command Line Bootcamp](https://g
 Open up Terminal/Gitbash and navigate to the 'Corpora' folder: `Desktop/project/corpora`
 
 ### Renaming text files based on metadata
-Remember how we used OpenRefine to come up with new, descriptive filenames? Well now, using a couple of command line tools, we can rename (or, technically, *move*) files according to our spreadsheet. **Drag your exported CSV into the corpora folder (or quickly download our version by pasting `$ curl @@where it's going to live on github@@`) into Terminal/Cygwin** @@ this finished version will be posted in the data viz folder and linked here@@
+Remember how we used OpenRefine to come up with new, descriptive filenames? Well now, using a couple of command line tools, we can rename (or, technically, *move*) files according to our spreadsheet. **Drag your exported CSV into the corpora folder (or quickly download our version by pasting `$ curl https://raw.githubusercontent.com/dhatwake2019/day2/master/dataviz/nc-lifehist-metadata.csv > nc-lifehist-metadata.csv`) into Terminal/Cygwin** 
 
 **Mac users**: 
 `$ sed -i -e '$'\n'' nc_lifehist_metadata.csv | cat nc_lifehist_metadata.csv | while IFS=, read -r orig new trash; do mv "$orig".txt "$new".txt; done`
