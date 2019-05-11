@@ -9,7 +9,7 @@ Written by Brandon T. Locke
 **This tutorial will demonstrate some of the most popular and powerful features of OpenRefine, including geocoding using an API, algorithmic word normalization and correction, and working with multi-value cells.**
 
 ### Data
-**You can [download a file of the NC life histories in this repo](@@@@).**
+**You can [download a file of the NC life histories in this repo](https://raw.githubusercontent.com/dhatwake2019/day2/master/organizingdata/nc-lh-meta.csv).**
 
 #### Life Histories Metadata (**nc-lh-meta.csv**)
 Dataset comprising metadata records for WPA Life Histories that take place in North Carolina, assembled by Lauren Tilton and partially destroyed by Brandon Locke.
@@ -21,13 +21,13 @@ Dataset comprising metadata records for WPA Life Histories that take place in No
 1. Click 'Open' in the top right to open a new OpenRefine tab
 1. Click 'Browse' and locate the nc-lh-meta.csv on your hard drive. Then click 'Next.'
 1. The Configure Parsing Options screen will ask you to confirm a few things. It has made guesses, based on the data, on the type of file, the character encoding and the character that separates columns. Take a look at the data in the top window and make sure everything looks like it's showing up correctly.
-1. Name the project "nclifehist" and click 'Create Project' in the top right corner.
+1. Name the project 'nc-lifehist-metadata' and click 'Create Project' in the top right corner.
 
 #### Evaluation
 Take a minute to look around. Consider the structure of the data with principles of "tidy data" in mind. This will help guide what types of operations you perform on the data. Also take time to evaluate the type of information that is represented and what type of questions you might want to ask of it (e.g. Which publishers are most prominently represented in the collection?)
 
 #### Working with Multi-Value Cells
-This data has multiple people listed in the 'interviewer' and 'interviewee' columns, and in the 'gender_interviewee' and 'occupation' columns; in every case, there's a comma between values. For many purposes, this works great—it's the most compact and concise way to represent this information. But for many purposes, you may need to format this data differently. So, if you wanted to visualize your data, it wouldn't count `farmer, mechanic` as both a farmer and a mechanic, but a distinct separate entity. (Although sometimes that's what you want!) There are two ways you may want to handle this.
+This data has multiple people listed in the 'interviewer' and 'interviewee' columns, and in the 'gender_interviewee' and 'occupation' columns; in every case, there's a comma between values. For many purposes, this works great—it's the most compact and concise way to represent this information. But for many purposes, you may need to format this data differently. So, if you wanted to visualize your data, it wouldn't count `Joe Childress, Pelvie Childress` as both Joe Childress and Pelvie Childress, but a distinct separate entity of both. (Although sometimes that's what you want!) There are two ways you may want to handle this.
 
 **Multiple Columns with One Value in Each**
 1. Click on the small triangle next to 'interviewee' then click 'Edit Column' then 'Split into several columns'
@@ -37,15 +37,16 @@ This data has multiple people listed in the 'interviewer' and 'interviewee' colu
 We could do this for 'gender_interviewee' and 'occupation' columns, but we'll try a couple of other ways.
 
 **Create TRUE/FALSE Columns Based on Values**
-1. Select gender_interviewee > Edit column based on this column
+1. Select gender_interviewee > Edit column > Add column based on this column
 2. In the GREL window, type `if(value.contains("female"), "true", "false")`
-3. Call this column 'isFemale' and click OK.
-4. Do this again for Male. gender_interviewee > Edit column based on this column. Take a look at the preview.
+3. Call this column 'interviewee_isFemale' and click OK.
+4. Do this again for Male. gender_interviewee > Edit column > Add column based on this column, `if(value.contains("male"), "true", "false")`. Take a look at the preview.
 5. Uh-oh. It looks like using "male" would make everything true since the string 'male' also appears in 'female.' We'll need a slightly more complex regular expression to match.
-6. Type `if(value.contains(/\bmale|\s+male/), "true", "false")` into the GREL window. name it 'isMale' and click OK.
+6. Type `if(value.contains(/\bmale|\s+male/), "true", "false")` into the GREL window. name it 'interviewee_isMale' and click OK.
 > `\b` sigifies the start of a string, `|` means it will match either of the two patterns, `\s+` means there can be multiple white spaces before the string. This means it will match 'male' if it is either at the beginning of the cell, or if it comes after a space. We have to include both since there are some columns where that say "female, male".
 
 **Dealing with categories where there are lots of different responses** 
+
 What about Occupation? If we look at the distribution (occupation > Text > Text facet; then click 'count' to sort by count), We see that tenant farmer and farmer come up almost a quarter of the time (not including the times they come up in multiple entries), housewife and mill worker come up 8 times, and everything else is 4 or less. If we're interested in separating out some of the more popular ones, and doing further analysis, we may want to create isTenantFarmer, isFarmer, isHousewife, etc rows. We may want to split the separate occupations apart and create an occupation2 column. Or, if we're just going to refer to them occasionally to inform our reading, we can just leave them as-is. Let's do that!
 
 > *Sometimes we may want to leave this together! In the case of interviewer, we may want to look at them as teams, rather than two different interviewers.*
@@ -64,7 +65,11 @@ Each column has a facet function that allows you to quickly identify inconsisten
 
 Click the Interviewer column > Select Facet > Select Text Facet. Take a look at some of the inconsistencies
 
-We could go through each of these and edit them, as we did for the race column, but that could take a long time. In OpenRefine, it's also possible to cluster and normalize variation across the dataset algorithmically. Clustering will look for patterns of variation without the need for you to (1) sleuth your way through the dataset looking for small variations (2) using facets or filters to eliminate them one at a time. Begin with the default method of 'key collision' using the 'fingerprint' function. Clustering reveals patterns of irregularity throughout the selected column of data. It is then possible to review clustering results and merge the data into the desired form. For more information on all of the available clustering methods and functions consult [OpenRefine documentation on Github](https://github.com/OpenRefine/OpenRefine/wiki/Clustering-In-Depth).
+We could go through each of these and edit them, as we did for the race column, but that could take a long time. In OpenRefine, it's also possible to cluster and normalize variation across the dataset algorithmically. Clustering will look for patterns of variation without the need for you to (1) sleuth your way through the dataset looking for small variations (2) using facets or filters to eliminate them one at a time. 
+
+Click on the 'Cluster' button on the left side.
+
+Begin with the default method of 'key collision' using the 'fingerprint' function. Clustering reveals patterns of irregularity throughout the selected column of data. It is then possible to review clustering results and merge the data into the desired form. For more information on all of the available clustering methods and functions consult [OpenRefine documentation on Github](https://github.com/OpenRefine/OpenRefine/wiki/Clustering-In-Depth).
 
 1. Click on the 'Cluster' button that's on the left side of the screen, just above the list of terms.
 2. Review the proposed merges. Do they make sense?
@@ -72,15 +77,40 @@ We could go through each of these and edit them, as we did for the race column, 
 4. There are several different algorithms here that can be used. On the left, you'll see a dropdown that says 'key collision.' Click on that, and select nearest neighbor.
 5. Select the merges that make sense, and hit 'Merge Selected & Re-Cluster.'
 6. Let's change the radius here to 8 and see if a wider lense would help.
-7. Are all of these correct?
+7. Are all of these correct? Select the correct ones and click 'Merge Selected & Close'
+8. Take a look at the facet list—does this look correct?
 
 #### Working with dates
 This dataset has the date information split out into three separate columns—year, month, and day. This is good for some purposes, but oftentimes, it's helpful to have all info in one column—either to sort things or because a tool you're using wants [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601). Let's combine those columns together to make a single YYYY-MM-DD column.
 
+This work is slightly complicated by the fact that a few of the interviews either have a range of days (Dec 10-14, 1938), or a few selected days (Dec 10, 12, 13, 1938). Depending on our needs, we can either cut off all but the start dates, or we can create a range. Let's work on a range of dates. (Luckily for us, none of them ocurred in more than one month!).
+
+1. day_interview > Edit column > Split into several colums
+2. In the separator field, enter `[,-]` and click 'regular expression'. This will split on either a comma or a dash.
+3. Click ok.
+4. To save a little bit of trouble, we're going to do some quick manual editing! Click day_interview 2 > Facet > Text Facet
+5. There are only two interviews where there were three separate days listed. Click on the '(number)' facet to limit our screen to just those two.
+6. For those two, let's edit the day_interview 1 column to reflect the numbers in the day_interview 2 field. This will give us the full range of the interview.
+7. Clear the facet to see the full dataset
+7. Click day_interview 2 > Edit column > Remove this column
+
+Ok, so now all od the individual date columns either have a single number in them, or are blank.
+
 1. year_interview > Edit column > Add column based on this column...
-2. In the GREL box, type `cells["year_interview"].value + "-" + cells["month_interview"].value + "-" + cells["day_interview"].value`. You may notice that this doesn't add leading zeroes (e.g. it should say '1939-**03**-29' instead of '1939-**3**-29'), but we'll take care of that in a moment.
-3. Call the column 'fullDate' and click ok.
+2. In the GREL box, type `cells["year_interview"].value + "-" + cells["month_interview"].value + "-" + cells["day_interview 1"].value`. You may notice that this doesn't add leading zeroes (e.g. it should say '1939-**03**-29' instead of '1939-**3**-29'), but we'll take care of that in a moment.
+3. Call the column 'startDate' and click ok.
 4. Click 'date_new' > Edit cells > Common transforms > To date
+
+Now to create the endDate column:
+1. day_interview 2 > Facet > Text Facet
+2. Click 'include' for everything that isn't blank (if you hover over the row, include/exclude should appear on the right)
+1. year_interview > Edit column > Add column based on this column...
+2. In the GREL box, type `cells["year_interview"].value + "-" + cells["month_interview"].value + "-" + cells["day_interview 1"].value`. You may notice that this doesn't add leading zeroes (e.g. it should say '1939-**03**-29' instead of '1939-**3**-29'), but we'll take care of that in a moment.
+3. Call the column 'endDate' and click ok.
+4. Click 'date_new' > Edit cells > Common transforms > To date
+5. Close out the facet on the left to get the rest of the data back.
+
+At this point, we could facet only the blank endDates and copy over the start date info for all of them, but I'm sick of dealing with this so let's skip it.
 
 #### Creating a new filename
 In a later session, we'll rename these text files so that we can use them a little more easily. Right now, the only information that's in the name is the interview number, which we can use to connect with all of this other metadata. But it would be easier for us to search, select, or sort the files if we had this information right there in the filename. 
@@ -91,14 +121,20 @@ While we don't absolutely have to create a filename in OpenRefine (we could just
 1) When we rename the files, it'll be good to have that updated name in the spreadsheet!
 2) It's easier this way.
 
-Also, be sure that the first column is the old filename and the second column is the new filename. This will help us later on when we rename them!
+We'll want to take care of one thing first. All rows have an interviewer name and an interview number, but not all of them have a date. To fix this:
+
+1. startDate > Facet > Text Facet
+2. Click on '(blank)'
+3. In the top startDate cell, click edit. Type in 'nodate', and then click 'Apply to all identical cells'. Clear the facet to view the full dataset.
 
 So let's get started on combining these metadata fields.
 1. file_name > Edit column > Add column based on this column...
-2. In the GREL window, paste `substring(cells["fullDate"].value,0,10).replace("-","") + "_" + replaceChars(cells["interviewer"].value,'., ',"") + "_" + value.replace("interview_","")` this takes the date column, pulls just the first 10 characters (yyy-mm-dd), and replaces the `-` with nothing
+2. In the GREL window, paste `substring(cells["startDate"].value,0,10).replace("-","") + "_" + replaceChars(cells["interviewer"].value,'., ',"") + "_" + value.replace("interview_","")` this takes the date column, pulls just the first 10 characters (yyy-mm-dd), and replaces the `-` with nothing
 * `replaceChars(cells["interviewer"].value,'., ',"")` this takes the information from the interviewer column and replaces all periods, commas, and spaces with nothing
 * `value.replace("interview_","")` this takes the filename column and replaces 'interview_' with nothing so that only the number remains
-5. Name this column new_filename and hit ok
+5. Name this column new_filename and hit ok. You should see it edit 301 cells in the yelleow box at the top.
+
+Be sure that the first column is the old filename and the second column is the new filename. This will help us later on when we rename them!
 
 #### Geocoding
 *[Geocod.io](https://geocod.io/) may also be a good option*
@@ -106,7 +142,7 @@ So let's get started on combining these metadata fields.
 *If you're doing this for your own project, you'll need to get a MapQuest API Key from the [MapQuest Developer Site](https://developer.mapquest.com/) - click the 'Get your Free API Key' button on the front page and fill out the information. For this workshop, I'm making a key available, and will cancel the key after our session*
 
 *We'll also just do a few rows, since this can take awhile*
-@@@@find/create a key for this@@
+
 - Let's limit our work to just geocoding cities in Sampson County. Click County > Filter, and then type in Sampson. This should just show the 6 rows from Sampson County.
 - Then click **City** > Edit Column > Add Column by Fetching URLs... and enter this expression: `'http://open.mapquestapi.com/nominatim/v1/search.php?' + 'key=YOURKEY&' + 'format=json&' + 'q=' + escape(value, 'url') + '+north+carolina'` **Note: Be sure to add your own API key in the above expression where it says `key=`**
 - Name the column 'geocodingResponse' and click OK. This will take quite some time to finish.

@@ -15,19 +15,18 @@ We'll be using the same data as we did for the [Command Line Bootcamp](https://g
 Open up Terminal/Gitbash and navigate to the 'Corpora' folder: `Desktop/project/corpora`
 
 ### Renaming text files based on metadata
-Remember how we used OpenRefine to come up with new, descriptive filenames? Well now, using a couple of command line tools, we can rename (or, technically, *move*) files according to our spreadsheet. **Drag your exported CSV into the corpora folder (or quickly download our version by pasting `$ curl @@@where it's going to live on github@@`)** @@@ this finished version will be posted in the data viz folder and linked here@@
+Remember how we used OpenRefine to come up with new, descriptive filenames? Well now, using a couple of command line tools, we can rename (or, technically, *move*) files according to our spreadsheet. **Drag your exported CSV into the corpora folder (or quickly download our version by pasting `$ curl @@where it's going to live on github@@`) into Terminal/Cygwin** @@ this finished version will be posted in the data viz folder and linked here@@
 
-@@update this to have the filename that's recommended
 **Mac users**: 
-`$ sed -i -e '$'\n'' test.csv | cat test.csv | while IFS=, read -r orig new trash; do mv "$orig".txt "$new".txt; done`
+`$ sed -i -e '$'\n'' nc_lifehist_metadata.csv | cat nc_lifehist_metadata.csv | while IFS=, read -r orig new trash; do mv "$orig".txt "$new".txt; done`
 
 **Windows users**: 
-`$ sed -i -e '$a\' test.csv | cat test.csv | while IFS=, read -r orig new trash; do mv "$orig" "$new"; done`
+`$ sed -i -e '$a\' nc_lifehist_metadata.csv | cat nc_lifehist_metadata.csv | while IFS=, read -r orig new trash; do mv "$orig" "$new"; done`
 
 This command is really long and a bit confusing, so we'll break it down. 
-`sed -i -e '$'\n'' test.csv ` - @@rename This is a bit of a weird workaround. The way we'll be going through the csv will only operate on lines with a line return on the end. It wouldn't be all that strange for a csv to end without one, so we run the risk of missing the final row. `sed` ("stream editor") is a text manipulation tool, `-i` means it's edited in place (as opposed to making a backup), `$` jumps to the end of the file, `'\n'` adds the character for the line return, and `test.csv` identifies the file all of this will be performed on.
+`sed -i -e '$'\n'' nc_lifehist_metadata.csv ` - This is a bit of a weird workaround. The way we'll be going through the csv will only operate on lines with a line return on the end. It wouldn't be all that strange for a csv to end without one, so we run the risk of missing the final row. `sed` ("stream editor") is a text manipulation tool, `-i` means it's edited in place (as opposed to making a backup), `$` jumps to the end of the file, `'\n'` adds the character for the line return, and `test.csv` identifies the file all of this will be performed on.
 
-`cat test.csv |` - `cat` stands for concatenate, but it's often used to just pass some data into another tool; in this case, we're taking the file, now with a line return, and feeding it into the next command.
+`cat nc_lifehist_metadata.csv |` - `cat` stands for concatenate, but it's often used to just pass some data into another tool; in this case, we're taking the file, now with a line return, and feeding it into the next command.
 
 `while IFS=, read -r orig new trash;` - this is starting a loop that will go through every row and perform a specific task ('while' meaning 'while there are more lines'), IFS (internal file structure) & read are a way of processing structured data and assigning variables, and the `orig new trash` section is the set of variables we're creating. Since we've put out three variables, it will take the first chunk (everything until a comma) and assign it to the first variable (orig), take the next chunk (between the first and second comma) and assign it to the second variable (new), and then assign all of the rest to the third and final variable (trash). If we wanted to, we could create a variable for every one of the columns and construct a filename from each piece, but it's easier to just shove everything into a third variable (trash) and just not use it.
 
