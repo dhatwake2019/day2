@@ -40,6 +40,10 @@ What if we wanted to create a map of the interview locations and see how they're
 6. Scroll Down to the Points portion. For Name, put in the City column, put in the lat and lon columns, and then click Preview.
 7. Name this 'map-allinterviews'
 
-#### Create a Dashboard
+#### Create a Story
+Stories are a way to contextualize and share multiple interactive visualizations. [It is essentially a web-hosted slideshow that can include the visualizations you've created.]
 
-@@finish
+1. Click 'New' under stories
+2. Follow the instructions to add one of the vizualiations you've created.
+3. Add a few more, including a basic slide or two.
+4. When you're done, click 'Export & Publish' in the top right, just like the other visualizations.
