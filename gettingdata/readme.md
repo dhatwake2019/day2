@@ -60,7 +60,7 @@ one of your own:
 
 ### LC’s Chronicling America API
 
-####Description
+#### Description
 An API (application programming interface) is a defined set of methods for communicating with a software system. Each database has its own system, so looking at the codex and documentation for each is necessary. APIs can be public or private, though even public ones usually require a key to make sure the service isn’t being absed. Most API’s require that you get a key to access the API—this allows them to shut down abusive use. We’ll just hope that our calls won’t get our IP banned :). Library of Congress has multiple APIs—they have some documentation on the Chronicling America API and a nice tutorial on working with the API through Python in Jupyter Notebooks.
 
 #### Why you might need it
