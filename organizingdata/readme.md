@@ -21,7 +21,7 @@ Dataset comprising metadata records for WPA Life Histories that take place in No
 1. Click 'Open' in the top right to open a new OpenRefine tab
 1. Click 'Browse' and locate the nc-lh-meta.csv on your hard drive. Then click 'Next.'
 1. The Configure Parsing Options screen will ask you to confirm a few things. It has made guesses, based on the data, on the type of file, the character encoding and the character that separates columns. Take a look at the data in the top window and make sure everything looks like it's showing up correctly.
-1. Name the project 'nc-lifehist-metadata' and click 'Create Project' in the top right corner.
+1. Name the project 'nc_lifehist_metadata' and click 'Create Project' in the top right corner.
 
 #### Evaluation
 Take a minute to look around. Consider the structure of the data with principles of "tidy data" in mind. This will help guide what types of operations you perform on the data. Also take time to evaluate the type of information that is represented and what type of questions you might want to ask of it (e.g. Which publishers are most prominently represented in the collection?)
