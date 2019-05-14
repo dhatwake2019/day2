@@ -69,6 +69,8 @@ It can be used for bulk downloading of text from Chronicling America or, with a 
 #### Scenario
 You want to study the newspaper coverage of North Carolina tenant farmers during the depression. 
 
+[Slides](https://docs.google.com/presentation/d/1hBfj5WVeEJiU2YWWcHfw5cmDDRUAXUPjG2W6_IUuPV0/edit?usp=sharing)
+
 #### Activity
 Use Postman and the ChronAm API to extract OCR text from the newspapers.
 *You don't have to create a Postman account—you can click the link at the bottom to skip!*
