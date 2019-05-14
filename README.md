@@ -1,7 +1,7 @@
 # day2
 Day Two of DH @ Wake
 
-[today's motivation](https://twitter.com/overtime/status/1127669730209411072)
+**[today's motivation](https://twitter.com/overtime/status/1127669730209411072)**
 
 [Organizing Structured Data with OpenRefine](https://github.com/dhatwake2019/day2/tree/master/organizingdata)
 
