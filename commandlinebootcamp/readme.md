@@ -32,7 +32,7 @@ For Windows users, open a program called **[Cygwin](https://www.cygwin.com/).**
 
 -   CTRL A - move cursor to the start of the line
 
--   CTRL D - move cursor to the end of the line
+-   CTRL E - move cursor to the end of the line
 
 ### Navigation & Creation
 
