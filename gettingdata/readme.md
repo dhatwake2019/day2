@@ -172,6 +172,7 @@ Now, using Windows Explorer/Finder, open up the Desktop/chronam folder and see w
 **Further Resources**
 
 - Brandon Locke, [Downloading America](https://github.com/brandontlocke/downloadingamerica)
+- Brian Keegan & Allison Morgan,, [Web Data Scraping](https://github.com/CU-ITSS/Web-Data-Scraping-S2019)
 - Ian Milligan, [*Automated Downloading with
 Wget*](http://programminghistorian.org/lessons/automated-downloading-with-wget)
 - Free Software Foundation, [*Wget
